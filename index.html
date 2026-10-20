@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Nishra 🎂</title>
+<style>
+:root{--bg1:#1a0b2e;--bg2:#3b1255;--pink:#ff6fb5;--gold:#ffd27a;--ink:#fff3fb;--card:rgba(255,255,255,.09);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Georgia,'Times New Roman',serif;color:var(--ink)}
+body{background:radial-gradient(circle at 20% 10%,var(--bg2),var(--bg1) 70%) fixed;overflow-x:hidden}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
+.screen{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;position:relative;z-index:2}
+.screen.on{display:flex;animation:fade 1s ease}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(2rem,9vw,3.4rem);margin:.2em 0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--pink));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4s linear infinite}
+@keyframes shine{to{background-position:200%}}
+p.sub{opacity:.8;max-width:30ch;line-height:1.5}
+input{font-size:1.8rem;letter-spacing:.5em;text-align:center;width:min(78vw,260px);padding:14px 10px 14px 24px;border-radius:16px;border:2px solid var(--pink);background:var(--card);color:var(--ink);outline:none;margin:18px 0 8px}
+input:focus{box-shadow:0 0 22px rgba(255,111,181,.6)}
+.shake{animation:shake .45s}
+@keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+button{font:inherit;font-size:1.05rem;color:#2a0a3d;background:linear-gradient(135deg,var(--gold),var(--pink));border:0;border-radius:999px;padding:13px 30px;cursor:pointer;box-shadow:0 8px 24px rgba(255,111,181,.4)}
+button:active{transform:scale(.96)}
+#err{min-height:1.4em;color:var(--gold);font-size:.95rem}
+#line{font-size:clamp(1.5rem,6.5vw,2.4rem);min-height:3em;display:flex;align-items:center;justify-content:center;max-width:16ch;transition:opacity .8s,transform .8s}
+#line.out{opacity:0;transform:translateY(-12px)}
+#line.big{font-size:clamp(2.3rem,11vw,4rem);color:var(--gold);text-shadow:0 0 28px var(--pink)}
+.env{width:min(86vw,360px);background:var(--card);border:1.5px solid rgba(255,111,181,.6);border-radius:22px;padding:26px 20px;cursor:pointer;backdrop-filter:blur(8px);animation:float 3.2s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.env .ic{font-size:3rem}
+.env q{display:block;margin-top:10px;font-style:italic;line-height:1.5;color:var(--gold);quotes:none}
+.env{position:relative;padding-top:78px}.flap{position:absolute;left:0;right:0;top:0;height:70px;background:linear-gradient(135deg,var(--pink),#b388ff);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s;border-radius:22px 22px 0 0}.env.open .flap{transform:rotateX(180deg)}.env.open{animation:none}.env q{max-height:0;opacity:0;overflow:hidden;transition:all 1.2s .7s;margin:0}.env.open q{max-height:280px;opacity:1;margin-top:14px}.mt{font-size:1.1rem}.pets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.pets span{background:rgba(255,111,181,.18);border:1px solid var(--pink);border-radius:999px;padding:6px 12px;font-size:.95rem}.hint{margin-top:16px;opacity:.7;font-size:.9rem}
+#reply{justify-content:flex-start;padding-top:36px;text-align:left}
+.wrap{width:min(92vw,520px)}
+.wrap h2{text-align:center;color:var(--gold);font-weight:normal;font-size:1.5rem;margin:0 0 6px}
+.qq{text-align:center;font-style:italic;opacity:.75;font-size:.9rem;margin-bottom:22px}
+.blk{background:var(--card);border-left:3px solid var(--pink);border-radius:14px;padding:16px 18px;margin:0 0 14px;line-height:1.6;opacity:0;transform:translateY(18px);transition:all .9s}
+.blk.show{opacity:1;transform:none}
+.blk b{color:var(--pink);display:block;margin-bottom:6px;font-size:1.05rem}
+.blk ul{margin:0;padding-left:18px}.blk li{margin:6px 0}
+.sign{text-align:center;font-size:1.3rem;color:var(--gold);margin:22px 0 40px}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<section class="screen on" id="lock">
+  <div style="font-size:3rem">🔒🎂</div>
+  <h1>Hey Nishra…</h1>
+  <p class="sub">Something special is waiting for you. Enter the secret code (hint: the year you were born) 💖</p>
+  <input id="code" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
+  <div id="err"></div>
+  <button id="go">Unlock ✨</button>
+</section>
+
+<section class="screen" id="intro">
+  <div id="line"></div>
+</section>
+
+<section class="screen" id="box">
+  <h1>A message for you ✉️</h1>
+  <p class="sub">You asked for something this birthday. Here it is. Tap it.</p>
+  <div class="env" id="env">
+    <div class="flap"></div><div class="mt">📬 You’ve got mail, Nishra!<br><small style="opacity:.7">From: your bestie 💖 · tap to open</small></div>
+    <q>“A detailed explanation of all your favorite things about me, exactly why you like me, why you’re grateful for me, and all the things that remind you of me.”</q>
+  </div>
+  <div class="hint">tap the mail to open it ↑</div>
+</section>
+
+<section class="screen" id="reply">
+  <div class="wrap">
+    <h2>Happy Birthday, Nishra 🎂</h2>
+    <div class="qq">Here’s your answer, in extreme detail 😌</div>
+    <div class="blk"><b>💖 My favorite things about you</b><ul>
+      <li>Your heart. You care so deeply and never ask for anything back… except when it’s studies, then it’s “Sir, please explain this one more time” 😂📚 (and yes, I’ll explain it again, as always).</li>
+      <li>You made me your sir 👨‍🏫 and your problem-solver, but you gave me something bigger: the feeling of being trusted. Helping you out of tough times is my favorite job, free of cost, forever.</li>
+      <li>The way you listen. You don’t just hear me, you understand me.</li>
+      <li>Your laugh. It can fix my worst day in two seconds.</li>
+      <li>You’re real. No fake vibes, no pretending. That’s so rare.</li></ul></div>
+    <div class="blk"><b>🌸 Why I like you so much</b>With you I never have to act. I can be messy, quiet, loud, sad or silly, and you still stay. You make me feel safe being myself.</div>
+    <div class="blk"><b>🥹 Why I’m so grateful for you</b>When I was at my lowest and nobody was trusting me, you were there. You believed in me when I couldn’t believe in myself. You didn’t leave, you didn’t judge, you just stayed. I will never forget that, ever. And somehow we became each other’s therapist, taking turns holding each other up. Not everyone gets a friendship like that.</div>
+    <div class="blk"><b>🏷️ All your official titles</b>You have more names than a royal family 😂<div class="pets"><span>🐻‍❄️ Polar Bear</span><span>🐼 Panda</span><span>😴 Extreme Sleeper</span><span>🛏️ Bed Lover</span></div><br>Polar Bear, because you’re soft and cuddly but protect the people you love. Panda, because you’re cute and always eating or sleeping. Extreme Sleeper, because even the alarm gives up on you. Bed Lover, because your bed is your real best friend (don’t worry, I’m a close second 😌).</div>
+    <div class="blk"><b>🍂 Things that remind me of you</b><ul>
+      <li>Any cozy bed, pillow or blanket 🛏️ and every panda or polar bear I see 🐼🐻‍❄️</li>
+      <li>October, obviously. It’s your month, and it feels like you: warm and cozy.</li>
+      <li>Late-night talks where we fix each other’s life.</li>
+      <li>Anything comforting, because that’s exactly what you are to me.</li>
+      <li>Every time someone shows up for someone. That’s you.</li></ul></div>
+    <div class="blk">You’re not just my bestie, you’re one of the most important people in my life. I hope this year gives you everything you’ve given to others: love, peace, and people who show up for you the way you show up for me.</div>
+    <div class="sign">I love you so much. Happy Birthday, my person. 💖<br>🎂✨🎉</div>
+  </div>
+</section>
+
+<script>
+var CODE="2009"; // birth year
+var $=function(i){return document.getElementById(i)};
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});$(id).classList.add('on');window.scrollTo(0,0)}
+var cv=$('cv'),cx=cv.getContext('2d'),P=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);
+var cols=['#ff6fb5','#ffd27a','#b388ff','#7ee8fa','#fff'];
+function burst(n){for(var i=0;i<n;i++)P.push({x:Math.random()*cv.width,y:-10-Math.random()*cv.height*.3,vx:(Math.random()-.5)*3,vy:2+Math.random()*4,r:3+Math.random()*5,c:cols[i%5],a:Math.random()*6,life:260})}
+function tick(){cx.clearRect(0,0,cv.width,cv.height);P=P.filter(function(p){return p.life>0&&p.y<cv.height+20});P.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.a+=.15;p.life--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.globalAlpha=Math.min(1,p.life/60);cx.fillRect(-p.r,-p.r/2,p.r*2,p.r);cx.restore()});requestAnimationFrame(tick)}tick();
+function check(){
+  if($('code').value===CODE){$('err').textContent='';burst(160);show('intro');play()}
+  else{$('err').textContent='Hmm, not quite. Try again 😉';var c=$('code');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake')}
+}
+$('go').onclick=check;$('code').onkeydown=function(e){if(e.key==='Enter')check()};
+var L=['Today is a very special day ✨','Because a beautiful soul was born 🌸','Someone who makes life softer 💖','HAPPY BIRTHDAY NISHRA! 🎂🎉'];
+function play(){var i=0,el=$('line');(function n(){
+  if(i>=L.length){setTimeout(function(){show('box')},2600);return}
+  el.className='';el.textContent=L[i];if(i===L.length-1){el.className='big';burst(220)}
+  var last=i===L.length-1;i++;
+  setTimeout(function(){if(!last)el.className='out';setTimeout(n,last?0:800)},last?100:2200);
+})()}
+$('env').onclick=function(){var e=$('env');if(e.classList.contains('open'))return;e.classList.add('open');burst(60);setTimeout(go2,3200)};function go2(){show('reply');burst(120);document.querySelectorAll('.blk').forEach(function(b,k){setTimeout(function(){b.classList.add('show')},700+k*1100)})};
+</script>
+</body>
+</html>
